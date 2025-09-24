@@ -74,14 +74,15 @@ require 'json'
   # suvegarde les emails dans un fichier JSON
   def save_as_JSON
     result = townhall_scrapper()
-    File.open('db/email.json', 'w') do |f|
+    File.open('db/emails.json', 'w') do |f|
       f.write(result.to_json)
     end
+    puts "Les données ont été sauvegardées avec succès dans db/emails.json"
   end
 
   # lecture du fichier JSON emails.json
   def read_JSON
-    json = File.read('db/email.json')
+    json = File.read('db/emails.json')
     obj = JSON.parse(json)
     return obj  # affiche le fichier json
   end
@@ -124,10 +125,35 @@ require 'json'
 
   # sauvegarde les emails dans un fichier CSV
   def save_as_CSV
-    result = townhall_scrapper()
-    File.open('email.csv', 'w') do |f|
-      f.write(result.to_csv)
+    result = townhall_scrapper
+    if result.nil? || result.empty? || (result.is_a?(Array) && result.first == "err")
+      puts "Aucune donnée à sauvegarder dans le fichier CSV."
+      return
     end
+    CSV.open('db/emails.csv', 'w') do |csv|
+      # Ajoute les en-têtes, y compris la colonne "N°"
+      csv << ["Line number"] + result.first.keys
+      # Ajoute les données pour chaque mairie avec un numéro de ligne
+      result.each_with_index { |hash, index| csv << [index + 1] + hash.values }
+    end
+    puts "Les données ont été sauvegardées avec succès dans db/emails.csv"
+  end
+
+  # lit les emails depuis un fichier CSV et les affiche
+  def read_CSV
+    file_path = 'db/emails.csv'
+    unless File.exist?(file_path)
+      puts "Le fichier #{file_path} n'existe pas."
+      return []
+    end
+    puts "Contenu du fichier CSV :"
+    data = []
+    CSV.foreach(file_path, headers: true) do |row|
+      row_hash = row.to_h
+      puts "- #{row_hash['townhall_name']}: #{row_hash['email']}"
+      data << row_hash
+    end
+    data
   end
 
 end

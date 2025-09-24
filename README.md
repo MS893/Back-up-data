@@ -21,8 +21,8 @@ A simple and configurable tool to perform bulk data backups from a specified sou
 
 Before you begin, ensure you have the following installed:
 
-*   [e.g., Python 3.8+, Node.js v16+, etc.]
-*   [e.g., pip, npm, yarn, etc.]
+*   Ruby (la version est spécifiée dans le `Gemfile`)
+*   Bundler (`gem install bundler`)
 *   Git
 
 ## Installation
@@ -36,11 +36,7 @@ Before you begin, ensure you have the following installed:
 2.  **Install dependencies:**
     *(Choose the command relevant to your project)*
     ```bash
-    # For Python
-    pip install -r requirements.txt
-
-    # For Node.js
-    npm install
+    bundle install
     ```
 
 ## Configuration
@@ -91,11 +87,7 @@ This project uses two files for configuration, which are ignored by Git for secu
 To run the backup process, execute the main script from the command line:
 
 ```bash
-# Example for Python
-python main.py
-
-# Example for Node.js
-node index.js
+ruby app.rb
 ```
 
 ## Contributing

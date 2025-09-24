@@ -26,6 +26,8 @@ if __FILE__ == $0
 
   # CSV
   Emails.new.save_as_CSV
+  read_CSV = Emails.new.read_CSV
+  pp read_CSV
 
   # Emails.new.perform
 
