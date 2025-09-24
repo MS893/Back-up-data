@@ -48,7 +48,7 @@ if __FILE__ == $0
       read_CSV = Emails.new.read_CSV
       pp read_CSV
     when 'q'
-      puts "\nAu revoir !"
+      puts "\nAu revoir"
       break
     else
       puts "\nErreur : Choix non valide. Veuillez réessayer."
