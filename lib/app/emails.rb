@@ -147,13 +147,16 @@ require 'json'
       return []
     end
     puts "Contenu du fichier CSV :"
-    data = []
-    CSV.foreach(file_path, headers: true) do |row|
-      row_hash = row.to_h
-      puts "- #{row_hash['townhall_name']}: #{row_hash['email']}"
-      data << row_hash
-    end
-    data
+    data = CSV.read(file_path)
+    return data
+    # code en utilisant CSV.foreach (permet de formater la sortie) :
+    #data = []
+    #CSV.foreach(file_path, headers: true) do |row|
+    #  row_hash = row.to_h
+    #  puts "- #{row_hash['townhall_name']}: #{row_hash['email']}"
+    #  data << row_hash
+    #end
+    #data
   end
 
 end
