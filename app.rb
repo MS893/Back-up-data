@@ -16,7 +16,7 @@ require 'app/emails'
 if __FILE__ == $0
 
   # JSON
-  Emails.new.save_as_JSON
+  # Emails.new.save_as_JSON
   obj = Emails.new.read_JSON
   pp obj  # affiche le fichier json
 
@@ -25,7 +25,7 @@ if __FILE__ == $0
   # Emails.new.read_spreadsheet
 
   # CSV
-  Emails.new.save_as_CSV
+  # Emails.new.save_as_CSV
   read_CSV = Emails.new.read_CSV
   pp read_CSV
 
